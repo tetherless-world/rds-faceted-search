@@ -1,0 +1,221 @@
+{
+  "dataset": {
+    "properties": {
+      "title": {
+        "type": "multi_field",
+        "fields": {
+          "title": {
+            "type": "string",
+            "index": "analyzed"
+          },
+          "exact": {
+            "type": "string",
+            "index": "not_analyzed"
+          }
+        }
+      },
+      "uri": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "abstract": {
+        "type": "string"
+      },
+      "doi": {
+        "type": "string",
+        "index":"not_analyzed"
+      },
+      "publicationYear": {
+        "type": "date",
+        "format": "year"
+      },
+      "publicationDate": {
+        "type": "date",
+        "format": "date"
+      },
+      "contributors": {
+        "properties": {
+          "name": {
+            "type": "multi_field",
+            "fields": {
+              "name": {
+                "type": "string",
+                "index": "analyzed"
+              },
+              "exact": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "researchArea": {
+            "type": "multi_field",
+            "fields": {
+              "researchArea": {
+                "type": "string",
+                "index": "analyzed"
+              },
+              "exact": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "organization": {
+            "properties": {
+              "name": {
+                "type": "multi_field",
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "index": "analyzed"
+                  },
+                  "exact": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              }
+            },
+            "uri": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          },
+          "rank": {
+            "type": "integer"
+          }
+        }
+      },
+      "leadResearcher" : {
+        "properties": {
+          "name": {
+            "type": "multi_field",
+            "fields": {
+              "name": {
+                "type": "string",
+                "index": "analyzed"
+              },
+              "exact": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "researchArea": {
+            "type": "multi_field",
+            "fields": {
+              "researchArea": {
+                "type": "string",
+                "index": "analyzed"
+              },
+              "exact": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "organization": {
+            "properties": {
+              "name": {
+                "type": "multi_field",
+                "fields": {
+                  "name": {
+                    "type": "string",
+                    "index": "analyzed"
+                  },
+                  "exact": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              }
+            },
+            "uri": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          }
+        }
+      },
+      "keywords" : {
+        "type": "multi_field",
+        "fields": {
+          "keywords": {
+            "type": "string",
+            "index": "analyzed"
+          },
+          "exact": {
+            "type": "string",
+            "index": "not_analyzed"
+          }
+        }
+      },
+      "distributions" : {
+        "properties": {
+          "accessURL": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "downloadURL": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "format": {
+            "type": "multi_field",
+            "fields": {
+              "format": {
+                "type": "string",
+                "index": "analyzed"
+              },
+              "exact": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          }
+        }
+      },
+      "landingPage" : {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "publisher": {
+        "properties": {
+          "name":{
+            "type":"multi_field",
+            "fields":{
+              "name":{
+                "type":"string",
+                "index":"analyzed"
+              },
+              "exact":{
+                "type":"string",
+                "index":"not_analyzed"
+              }
+            }
+          },
+          "uri":{
+            "type":"string",
+            "index": "not_analyzed"
+          }
+        }
+      }
+    }
+  }
+}

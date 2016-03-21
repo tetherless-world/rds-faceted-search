@@ -1,0 +1,36 @@
+{
+  "title": "Audio file documenting performance of automated music improvisation system CAIRA at the Music, Mind, and Invention Workshop",
+  "uri": "http://data.tw.rpi.edu/dataset/19",
+  "abstract": "The audio file documents the performance “CAIRA’s Configured Night.” CAIRA is an intelligent music system that was developed at Rensselaer Polytechnic Institute. In the document, CAIRA performs autonomously using prerecorded material by Pauline Oliveros on the V-Accordion. CAIRA is playing along with Jonas Braasch (soprano saxophone), and Doug Van Nort (GREIS system on laptop). CAIRA simulates human hearing using standard techniques of Computational Auditory Scene Analysis (CASA) including pitch perception, tracking of rhythmical structures, and timbre and texture recognition. It uses a Hidden Markov Model to recognize musical gestures and Evolutionary Algorithms to create new material, and a logic-based reasoning system integrated into the overall architecture for a hypothesis-driven approach. The current creative output of the system consists of presenting audio material that is processed from what the agent picks up during a music session. The material is analyzed using the HMM machine listening tools and CASA modules, restructured through evolutionary algorithms and then presented in context to what is being played live by the other musicians. The core idea of “CAIRA’s Configured Night” is to use footage of night scenery recorded during train rides both as visual art work and visual score. A catalog of clips was created for the piece. Each clip starts and ends with the dark sequences which regularly occur when filming from a train at night so that the clips can be arranged seamlessly in any order. For the piece, the various clips are categorized according to visual density, rate of change, object sizes and other features. The piece requires that the ensemble performing the piece discusses the various scenes to find verbal descriptors for each scene. Then, the ensemble is asked to improvise to each scene based on these descriptors. The performance for each scene is recorded and the data used to train the recognizer and create a meaningful link between the video clips and the ensemble improvisation. During the performance of the piece, the agent conducts and guides the ensemble by selecting appropriate clips based on the live acoustical analysis. For the live analysis, the agent captures the sound of each individual microphone using closely space microphones. From these data it calculates the tension curve for each musician based on an auditory loudness model analysis and a textural analysis. The agent ensures that each musician is featured in the performance and works with visual leitmotifs for each musician. The agent can help to shape the dynamic level of the ensemble by controlling the visual density of the presented clips and also guide the ensemble rhythmically using different visual rhythmic patterns. Based on first-order logic reasoning, the agent can decide to follow the ensemble by presenting visual material that reflects what is currently played by the ensemble, or it can take initiative by presenting new visual material to change the musical direction.",
+  "leadResearcher" : {
+    "uri": "http://data.tw.rpi.edu/instance/44f562d6-5e3d-4954-bf86-6cd3a56e2266",
+    "name": "Braasch, Jonas"
+  },
+  "contributors": [
+    {
+      "uri": "http://data.tw.rpi.edu/instance/4283c5f3-d2da-4f0a-b925-d1d0911a3c38",
+      "name": "Oliveros, Pauline"
+    },
+    {
+      "uri": "http://data.tw.rpi.edu/instance/7f70852c-3154-47a9-857e-7983aaf0ee07",
+      "name": "Van Nort, Doug"
+    }
+  ],
+  "keywords": [
+    "CAIRA",
+    "automated improvisation",
+    "music"
+  ],
+  "publicationYear": 2012,
+  "publisher": {
+    "uri": "http://data.tw.rpi.edu/instance/0ab9a1fd-e170-4bee-a2eb-9b487ef63ad0",
+    "name": "School of Architecture, RPI"
+  },
+  "distributions": [
+    {
+      "uri": "http://data.tw.rpi.edu/dataset/19/distribution/e894a75c-e804-41e0-bb47-338423dbe0b6",
+      "downloadURL": "http://data.tw.rpi.edu/data/dataset/97404ce1-6e0b-4730-8fa0-3dc7351290e7/resource/e894a75c-e804-41e0-bb47-338423dbe0b6/download/triplepointmarch2012mmiconference.wav",
+      "format": "wav"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datasets</title>
+
+    <script type="text/javascript" src="facetview2/vendor/jquery/1.7.1/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" href="facetview2/vendor/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="facetview2/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="facetview2/vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.css">
+    <script type="text/javascript" src="facetview2/vendor/jquery-ui-1.8.18.custom/jquery-ui-1.8.18.custom.min.js"></script>
+    <script type="text/javascript" src="facetview2/es.js"></script>
+    <script type="text/javascript" src="facetview2/bootstrap2.facetview.theme.js"></script>
+    <script type="text/javascript" src="facetview2/jquery.facetview2.js"></script>
+    <link rel="stylesheet" href="facetview2/css/facetview.css">
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.1/handlebars.min.js"></script>
+
+    <script id="dataset-template" type="text/x-handlebars-template">
+        {{! TODO handlebars for rendering results }}
+        <tr>
+            <td>
+                <div>
+                    {{#if title}}
+                    <div>
+                        <strong><a href="{{vivoRedirect uri}}" target="_blank">{{title}}</a></strong>
+                        {{#if publicationYear}}&nbsp;({{publicationYear}}){{/if}}
+                    </div>
+                    {{/if}}
+
+                    {{#if leadResearcher}}
+                    <div><strong>Lead Researcher:</strong> <a href="{{vivoRedirect leadResearcher.uri}}" target="_blank">{{leadResearcher.name}}</a></div>
+                    {{/if}}
+
+                    {{#if contributors}}
+                    <div><strong>Contributors:</strong> {{#expand contributors}}<a href="{{vivoRedirect uri}}" target="_blank">{{name}}</a>{{/expand}}</div>
+                    {{/if}}
+
+                    {{#if publisher}}
+                    <div><strong>Publisher:</strong> <a href="{{vivoRedirect publisher.uri}}" target="_blank">{{publisher.name}}</a></div>
+                    {{/if}}
+
+                    {{#if keywords}}
+                    <div><strong>Keywords:</strong> {{#expand keywords}}{{this}}{{/expand}}</div>
+                    {{/if}}
+
+                    {{#if landingPage}}<strong>LandingPage:</strong> <a href="{{landingPage}}" target="_blank">{{landingPage}}</a>{{/if}}
+
+                    {{#if distributions}}<strong>Distributions:</strong>{{#list distributions}}{{uri}}{{/list}}{{/if}}
+
+                </div>
+                <div>
+                    {{#if doi}}<a href="{{doiURL doi}}" target="_blank"><img class="badge" src="{{doiBadge doi}}"/></a>{{/if}}
+                </div>
+            </td>
+        </tr>
+    </script>
+
+    <script type="text/javascript">
+
+        Handlebars.registerHelper('vivoRedirect', function(uri) {
+            var vivo_base = "//data.tw.rpi.edu/info/";
+            var escapedURI = encodeURIComponent(uri);
+            return vivo_base +"individual?uri="+escapedURI;
+
+        });
+
+        Handlebars.registerHelper('doiURL', function(doi) {
+            return "//dx.doi.org/"+doi;
+        });
+
+        Handlebars.registerHelper('doiBadge', function(doi) {
+            var escapedDOI = encodeURIComponent(doi);
+            return "//dcotest.tw.rpi.edu/badges/badge?title=DOI&text="+escapedDOI+"&color=66CCFF";
+        });
+
+        Handlebars.registerHelper('distributionBadge', function(distribution) {
+            var escapedURI = encodeURIComponent(distribution.uri);
+            return "//dcotest.tw.rpi.edu/badges/badge?title="+distribution.format+"&text="+escapedURI+"&color=66CCFF";
+        });
+
+        Handlebars.registerHelper('expand', function(items, options) {
+            var out = "";
+            var j = items.length - 1;
+            for(var i = 0; i < items.length; i++) {
+                out += options.fn(items[i]);
+                if(i < j) {
+                    out += "; ";
+                }
+            }
+            return out;
+        });
+
+        Handlebars.registerHelper('list', function(items, options) {
+            var out = "<ul>";
+            for(var i=0, l=items.length; i<l; i++) {
+                out = out + "<li>" + options.fn(items[i]) + "</li>";
+            }
+            return out + "</ul>";
+        });
+
+        var source = $("#dataset-template").html();
+        var template = Handlebars.compile(source);
+
+    </script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('.dataset-browser').facetview({
+                search_url: '//localhost:9200/rds/dataset/_search',
+                page_size: 10,
+                sort: [
+                    {"title.exact" : {"order" : "asc"}}
+                ],
+                sharesave_link: false,
+                default_freetext_fuzzify: "*",
+                default_facet_operator: "AND",
+                default_facet_order: "count",
+                default_facet_size: 15,
+                facets: [
+                    {'field': 'leadResearcher.name.exact', 'display': 'Lead Researcher'},
+                    {'field': 'contributors.name.exact', 'display': 'Contributor'},
+                    {'field': 'publisher.name.exact', 'display': 'Publisher'},
+                    {'field': 'keywords.exact', 'display': 'Keywords'},
+                    {'field': 'publicationYear', 'display': 'Publication Year'},
+                    {'field': 'distributions.format.exact', 'display': 'Data Format'}
+                ],
+                render_result_record: function(options, record)
+                {
+                    return template(record).trim();
+                },
+                selected_filters_in_facet: true,
+                show_filter_field : true,
+                show_filter_logic: true,
+                default_facet_open: true,
+                show_short_url: true,
+                current_short_url: true
+            });
+        });
+    </script>
+
+    <style type="text/css">
+
+        #facetview_filters {
+            margin-left: 20px;
+        }
+        #facetview_rightcol {
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="dataset-browser"></div>
+</body>
+</html>
